@@ -11,7 +11,7 @@ public class HtmlGenerator {
         String doctype = getString(root, "doctype", "html");
         String language = getString(root, "language", "en");
 
-        HtmlWriter writer = new HtmlWriter();
+        HtmlRenderer writer = new HtmlRenderer();
         ElementRenderer elementRenderer = new ElementRenderer(writer);
         HeadRenderer headRenderer = new HeadRenderer(writer, elementRenderer);
         BodyRenderer bodyRenderer = new BodyRenderer(writer, elementRenderer);

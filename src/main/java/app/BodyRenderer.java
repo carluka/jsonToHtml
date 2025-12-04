@@ -7,10 +7,10 @@ import java.util.Map;
 
 public class BodyRenderer {
 
-    private final HtmlWriter writer;
+    private final HtmlRenderer writer;
     private final ElementRenderer elementRenderer;
 
-    public BodyRenderer(HtmlWriter writer, ElementRenderer elementRenderer) {
+    public BodyRenderer(HtmlRenderer writer, ElementRenderer elementRenderer) {
         this.writer = writer;
         this.elementRenderer = elementRenderer;
     }

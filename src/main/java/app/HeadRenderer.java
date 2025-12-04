@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class HeadRenderer {
 
-    private final HtmlWriter writer;
+    private final HtmlRenderer writer;
     private final ElementRenderer elementRenderer;
 
-    public HeadRenderer(HtmlWriter writer, ElementRenderer elementRenderer) {
+    public HeadRenderer(HtmlRenderer writer, ElementRenderer elementRenderer) {
         this.writer = writer;
         this.elementRenderer = elementRenderer;
     }

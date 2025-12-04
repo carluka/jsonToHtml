@@ -16,9 +16,9 @@ public class ElementRenderer {
             "meta", "link", "br", "hr", "img", "input"
     );
 
-    private final HtmlWriter writer;
+    private final HtmlRenderer writer;
 
-    public ElementRenderer(HtmlWriter writer) {
+    public ElementRenderer(HtmlRenderer writer) {
         this.writer = writer;
     }
 

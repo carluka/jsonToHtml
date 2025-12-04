@@ -1,9 +1,10 @@
 app\ElementRenderer.class
-app\ResourceJsonDocumentLoader.class
 app\BodyRenderer.class
 app\FileJsonDocumentLoader.class
 app\Main.class
 app\HeadRenderer.class
 app\HtmlGenerator.class
-app\HtmlWriter.class
+app\JsonDocumentLoaderFactory.class
+app\ResourceJsonDocumentLoader.class
+app\HtmlRenderer.class
 app\JsonDocumentLoader.class

@@ -1,6 +1,6 @@
 package app;
 
-public class HtmlWriter {
+public class HtmlRenderer {
 
     private final StringBuilder sb = new StringBuilder();
     private int indentLevel = 0;

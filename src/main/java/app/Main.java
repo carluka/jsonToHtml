@@ -1,6 +1,8 @@
 package app;
 
 import com.google.gson.JsonElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,11 +10,14 @@ import java.nio.file.Path;
 
 public class Main {
 
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
-        String inputFileName = args.length > 0 ? args[0] : "test2.json";
+        String inputFileName = args.length > 0 ? args[0] : "pageNotFound.json";
         String outputFileName = args.length > 1 ? args[1] : "output.html";
 
-        JsonDocumentLoader loader = selectLoader(inputFileName);
+        JsonDocumentLoaderFactory loaderFactory = new JsonDocumentLoaderFactory();
+        JsonDocumentLoader loader = loaderFactory.createLoader(inputFileName);
         HtmlGenerator htmlGenerator = new HtmlGenerator();
 
         try {
@@ -23,22 +28,12 @@ public class Main {
             Path outputPath = Path.of(outputFileName);
             Files.writeString(outputPath, html);
 
-            System.out.println("Generirana datoteka: " + outputPath.toAbsolutePath());
+            logger.info("Generirana datoteka: {}", outputPath.toAbsolutePath());
 
         } catch (IOException e) {
-            System.err.println("Napaka pri branju JSON datoteke: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Napaka pri branju JSON datoteke: {}", e.getMessage(), e);
         } catch (Exception e) {
-            System.err.println("Napaka pri generiranju HTML: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Napaka pri generiranju HTML: {}", e.getMessage(), e);
         }
-    }
-
-    private static JsonDocumentLoader selectLoader(String inputFileName) {
-        Path candidate = Path.of(inputFileName);
-        if (Files.exists(candidate) && Files.isRegularFile(candidate)) {
-            return new FileJsonDocumentLoader();
-        }
-        return new ResourceJsonDocumentLoader();
     }
 }
