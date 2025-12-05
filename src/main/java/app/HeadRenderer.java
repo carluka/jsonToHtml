@@ -17,9 +17,9 @@ public class HeadRenderer {
     }
 
     public void renderHead(JsonObject head) {
-        writer.openTag("head");
-        writer.newLine();
-        writer.increaseIndent();
+        writer.openTag("head")
+              .newLine()
+              .increaseIndent();
 
         if (head.has("meta") && head.get("meta").isJsonObject()) {
             JsonObject meta = head.getAsJsonObject("meta");
@@ -29,8 +29,7 @@ public class HeadRenderer {
 
                 if ("charset".equalsIgnoreCase(name) && value.isJsonPrimitive()) {
                     String attrs = "charset=\"" + elementRenderer.escape(value.getAsString()) + "\"";
-                    writer.voidTag("meta", attrs);
-                    writer.newLine();
+                    writer.voidTag("meta", attrs).newLine();
                 } else {
                     String content;
                     if (value.isJsonPrimitive()) {
@@ -57,8 +56,7 @@ public class HeadRenderer {
                     String attrs =
                             "name=\"" + elementRenderer.escape(name) + "\" content=\"" +
                                     elementRenderer.escape(content) + "\"";
-                    writer.voidTag("meta", attrs);
-                    writer.newLine();
+                    writer.voidTag("meta", attrs).newLine();
                 }
             }
         }
@@ -70,14 +68,12 @@ public class HeadRenderer {
                 for (JsonElement el : array) {
                     if (el.isJsonObject()) {
                         String attrs = elementRenderer.buildAttributes(el.getAsJsonObject());
-                        writer.voidTag("link", attrs);
-                        writer.newLine();
+                        writer.voidTag("link", attrs).newLine();
                     }
                 }
             } else if (linkElement.isJsonObject()) {
                 String attrs = elementRenderer.buildAttributes(linkElement.getAsJsonObject());
-                writer.voidTag("link", attrs);
-                writer.newLine();
+                writer.voidTag("link", attrs).newLine();
             }
         }
 
@@ -89,12 +85,11 @@ public class HeadRenderer {
             } else {
                 writer.text(elementRenderer.escape(title.toString()));
             }
-            writer.closeTag("title");
-            writer.newLine();
+            writer.closeTag("title").newLine();
         }
 
-        writer.decreaseIndent();
-        writer.closeTag("head");
-        writer.newLine();
+        writer.decreaseIndent()
+              .closeTag("head")
+              .newLine();
     }
 }

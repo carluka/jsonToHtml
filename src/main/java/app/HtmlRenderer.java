@@ -16,46 +16,54 @@ public class HtmlRenderer {
         }
     }
 
-    public void increaseIndent() {
+    public HtmlRenderer increaseIndent() {
         indentLevel++;
+        return this;
     }
 
-    public void decreaseIndent() {
+    public HtmlRenderer decreaseIndent() {
         if (indentLevel > 0) {
             indentLevel--;
         }
+        return this;
     }
 
-    public void newLine() {
+    public HtmlRenderer newLine() {
         sb.append("\n");
         newLine = true;
+        return this;
     }
 
-    public void text(String text) {
+    public HtmlRenderer text(String text) {
         writeIndentIfNeeded();
         sb.append(text);
+        return this;
     }
 
-    public void openTag(String name) {
+    public HtmlRenderer openTag(String name) {
         openTag(name, null);
+        return this;
     }
 
-    public void openTag(String name, String attributes) {
+    public HtmlRenderer openTag(String name, String attributes) {
         writeIndentIfNeeded();
         sb.append("<").append(name);
         if (attributes != null && !attributes.isEmpty()) {
             sb.append(" ").append(attributes);
         }
         sb.append(">");
+        return this;
     }
 
-    public void closeTag(String name) {
+    public HtmlRenderer closeTag(String name) {
         writeIndentIfNeeded();
         sb.append("</").append(name).append(">");
+        return this;
     }
 
-    public void voidTag(String name, String attributes) {
+    public HtmlRenderer voidTag(String name, String attributes) {
         openTag(name, attributes);
+        return this;
     }
 
     public String getContent() {

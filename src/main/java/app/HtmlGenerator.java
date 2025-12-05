@@ -16,13 +16,12 @@ public class HtmlGenerator {
         HeadRenderer headRenderer = new HeadRenderer(writer, elementRenderer);
         BodyRenderer bodyRenderer = new BodyRenderer(writer, elementRenderer);
 
-        writer.text("<!DOCTYPE " + elementRenderer.escape(doctype) + ">");
-        writer.newLine();
-
         String htmlAttrs = "lang=\"" + elementRenderer.escape(language) + "\"";
-        writer.openTag("html", htmlAttrs);
-        writer.newLine();
-        writer.increaseIndent();
+        writer.text("<!DOCTYPE " + elementRenderer.escape(doctype) + ">")
+              .newLine()
+              .openTag("html", htmlAttrs)
+              .newLine()
+              .increaseIndent();
 
         if (root.has("head")) {
             headRenderer.renderHead(requireObject(root.get("head"), "head"));
@@ -34,9 +33,9 @@ public class HtmlGenerator {
             throw new IllegalArgumentException("Koren JSON dokumenta mora imeti objekt 'body'.");
         }
 
-        writer.decreaseIndent();
-        writer.closeTag("html");
-        writer.newLine();
+        writer.decreaseIndent()
+              .closeTag("html")
+              .newLine();
 
         return writer.getContent();
     }

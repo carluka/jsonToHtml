@@ -21,9 +21,9 @@ public class BodyRenderer {
             bodyAttrs = elementRenderer.buildAttributes(body.getAsJsonObject("attributes"));
         }
 
-        writer.openTag("body", bodyAttrs);
-        writer.newLine();
-        writer.increaseIndent();
+        writer.openTag("body", bodyAttrs)
+              .newLine()
+              .increaseIndent();
 
         for (Map.Entry<String, JsonElement> entry : body.entrySet()) {
             String key = entry.getKey();
@@ -33,8 +33,8 @@ public class BodyRenderer {
             elementRenderer.renderElement(key, entry.getValue());
         }
 
-        writer.decreaseIndent();
-        writer.closeTag("body");
-        writer.newLine();
+        writer.decreaseIndent()
+              .closeTag("body")
+              .newLine();
     }
 }
